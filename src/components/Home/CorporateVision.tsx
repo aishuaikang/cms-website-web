@@ -42,8 +42,8 @@ const CompanyProfile = () => {
                     {/*  */}
                     <Text
                         w={"calc(100% - 600px - 50px)"}
-                        lineClamp={12}
-                        size="lg"
+                        lineClamp={18}
+                        // size="sm"
                         // className="right-0 top-[341px] w-[510px] h-[222px] text-justify text-lg tracking-[1px] leading-10 font-bold font-sans"
                         // lineClamp={3}
                     >

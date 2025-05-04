@@ -22,7 +22,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
     title: {
-        template: `%s｜${process.env.TITLE}`,
+        template: `%s｜${process.env.TITLE || "cms"}`,
         default: process.env.TITLE || "cms",
     },
     description: process.env.DESCRIPTION,

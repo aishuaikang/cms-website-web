@@ -14,6 +14,8 @@ import {
     UnstyledButton,
     Image as Img,
 } from "@mantine/core";
+import { getCategoryList } from "@/apis/category";
+import NavButton from "./NavButton";
 // function getScrollTop() {
 //     let scroll_top = 0;
 //     if (document.documentElement && document.documentElement.scrollTop) {
@@ -24,13 +26,16 @@ import {
 //     return scroll_top;
 // }
 
-const navs = [
-    { name: "产品", href: "/products/1" },
-    { name: "解决方案", href: "/solutions/1" },
-    { name: "新闻中心", href: "/news/1" },
-];
+// const navs = [
+//     { name: "产品", href: "/products/1" },
+//     { name: "解决方案", href: "/solutions/1" },
+//     { name: "新闻中心", href: "/news/1" },
+// ];
 
-const Nav = () => {
+export default async function Nav() {
+    const categoryList = await getCategoryList();
+    if (categoryList.code !== 200) return null;
+
     // const navRef = useRef<HTMLDivElement>(null);
 
     // const [isFixed, setIsFixed] = useState(false);
@@ -86,7 +91,7 @@ const Nav = () => {
             <Container size={"xl"} h={"100%"}>
                 <Group w={"100%"} h={"100%"}>
                     {/* className="w-[136px] h-full flex justify-center items-center ml-[24px]" */}
-                    <Center w={136} h={"100%"}>
+                    <Center component="h1" w={136} h={"100%"} m={0}>
                         <UnstyledButton
                             component={Link}
                             href="/"
@@ -114,38 +119,50 @@ const Nav = () => {
                         wrap="nowrap"
                     >
                         <Group>
-                            <UnstyledButton
+                            <NavButton href="/" name="首页" />
+                            {/* <UnstyledButton
                                 component={Link}
                                 href={"/"}
-                                // style={{
-                                //     color: isActived("/"),
-                                // }}
+                                style={{
+                                    color: isActived("/"),
+                                }}
                             >
                                 首页
-                            </UnstyledButton>
-                            {navs.map((item) => {
+                            </UnstyledButton> */}
+                            {categoryList.data.map((category) => {
                                 return (
-                                    <UnstyledButton
-                                        key={item.name}
-                                        component={Link}
-                                        href={item.href}
-                                        // style={{
-                                        //     color: isActived(item.href),
-                                        // }}
-                                    >
-                                        {item.name}
-                                    </UnstyledButton>
+                                    <NavButton
+                                        key={category.id}
+                                        href={"/category/" + category.alias}
+                                        name={category.name}
+                                    />
                                 );
+                                // return (
+                                //     <UnstyledButton
+                                //         key={category.id}
+                                //         component={Link}
+                                //         href={"/category/" + category.alias}
+                                //         style={{
+                                //             color: isActived(
+                                //                 "/category/" + category.alias
+                                //             ),
+                                //         }}
+                                //     >
+                                //         {category.name}
+                                //     </UnstyledButton>
+                                // );
                             })}
-                            <UnstyledButton
+                            <NavButton href="/about" name="关于我们" />
+
+                            {/* <UnstyledButton
                                 component={Link}
                                 href={"/about"}
-                                // style={{
-                                //     color: isActived("/about"),
-                                // }}
+                                style={{
+                                    color: isActived("/about"),
+                                }}
                             >
                                 关于我们
-                            </UnstyledButton>
+                            </UnstyledButton> */}
                         </Group>
                         <Group gap={4}>
                             <IconPhoneCall stroke={2} />
@@ -156,5 +173,4 @@ const Nav = () => {
             </Container>
         </Container>
     );
-};
-export default Nav;
+}
