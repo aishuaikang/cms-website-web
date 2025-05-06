@@ -6,16 +6,17 @@ import Link from "next/link";
 // import { usePathname } from "next/navigation";
 import { IconPhoneCall } from "@tabler/icons-react";
 import {
-    Center,
-    Container,
-    // DEFAULT_THEME,
-    Group,
-    Text,
-    UnstyledButton,
-    Image as Img,
+  Center,
+  Container,
+  // DEFAULT_THEME,
+  Group,
+  Text,
+  UnstyledButton,
+  Image as Img,
 } from "@mantine/core";
 import { getCategoryList } from "@/apis/category";
 import NavButton from "./NavButton";
+import { DICT_CODE, getDictByCode, getDictExtraByCode } from "@/apis/dict";
 // function getScrollTop() {
 //     let scroll_top = 0;
 //     if (document.documentElement && document.documentElement.scrollTop) {
@@ -33,94 +34,107 @@ import NavButton from "./NavButton";
 // ];
 
 export default async function Nav() {
-    const categoryList = await getCategoryList();
-    if (categoryList.code !== 200) return null;
+  const categoryList = await getCategoryList();
 
-    // const navRef = useRef<HTMLDivElement>(null);
+  const contactPhoneNumber = await getDictExtraByCode(
+    DICT_CODE.CONTACT_PHONE_NUMBER,
+  );
 
-    // const [isFixed, setIsFixed] = useState(false);
+  const logo = await getDictByCode(DICT_CODE.LOGO);
 
-    // const onScroll = () => {
-    //     const scrollTop = getScrollTop();
-    //     if (scrollTop >= 48) {
-    //         setIsFixed(true);
-    //     } else {
-    //         setIsFixed(false);
-    //     }
-    // };
+  // if (res.code !== 200) {
+  //   return <ErrorComponent title="获取联系电话失败" error={res.message} />;
+  // }
 
-    // useEffect(() => {
-    //     onScroll();
-    //     document.addEventListener("scroll", onScroll);
-    //     return () => {
-    //         document.removeEventListener("scroll", onScroll);
-    //     };
-    // }, []);
+  // const navRef = useRef<HTMLDivElement>(null);
 
-    // const pathname = usePathname();
+  // const [isFixed, setIsFixed] = useState(false);
 
-    // const isActived = (href: string) => {
-    //     if (pathname === "/") {
-    //         return href === pathname
-    //             ? "var(--mantine-primary-color-filled)"
-    //             : undefined;
-    //     } else {
-    //         return href === "/"
-    //             ? undefined
-    //             : pathname.startsWith(href)
-    //             ? DEFAULT_THEME.primaryColor
-    //             : undefined;
-    //     }
-    // };
+  // const onScroll = () => {
+  //     const scrollTop = getScrollTop();
+  //     if (scrollTop >= 48) {
+  //         setIsFixed(true);
+  //     } else {
+  //         setIsFixed(false);
+  //     }
+  // };
 
-    return (
-        <Container
-            // ref={navRef}
-            size={"xl"}
-            w={1200}
-            h={60}
-            className="fixed z-50 top-12 rounded-lg bg-white/50 backdrop-blur-lg left-1/2 transform -translate-x-1/2 transition-width duration-200 ease-linear"
-            style={
-                {
-                    // width: isFixed ? "100vw !important" : "calc(100% - 48px)",
-                    // top: isFixed ? 0 : "3rem",
-                    // borderRadius: isFixed ? "0 0 0.5rem 0.5rem" : "0.5rem",
+  // useEffect(() => {
+  //     onScroll();
+  //     document.addEventListener("scroll", onScroll);
+  //     return () => {
+  //         document.removeEventListener("scroll", onScroll);
+  //     };
+  // }, []);
+
+  // const pathname = usePathname();
+
+  // const isActived = (href: string) => {
+  //     if (pathname === "/") {
+  //         return href === pathname
+  //             ? "var(--mantine-primary-color-filled)"
+  //             : undefined;
+  //     } else {
+  //         return href === "/"
+  //             ? undefined
+  //             : pathname.startsWith(href)
+  //             ? DEFAULT_THEME.primaryColor
+  //             : undefined;
+  //     }
+  // };
+
+  return (
+    <Container
+      // ref={navRef}
+      size={"xl"}
+      w={1200}
+      h={60}
+      className="fixed z-50 top-12 rounded-lg bg-white/50 backdrop-blur-lg left-1/2 transform -translate-x-1/2 transition-width duration-200 ease-linear"
+      style={
+        {
+          // width: isFixed ? "100vw !important" : "calc(100% - 48px)",
+          // top: isFixed ? 0 : "3rem",
+          // borderRadius: isFixed ? "0 0 0.5rem 0.5rem" : "0.5rem",
+        }
+      }
+    >
+      <Container size={"xl"} h={"100%"}>
+        <Group w={"100%"} h={"100%"}>
+          {/* className="w-[136px] h-full flex justify-center items-center ml-[24px]" */}
+          <Center component="h1" w={136} h={"100%"} m={0}>
+            <UnstyledButton
+              component={Link}
+              href="/"
+              title={process.env.NEXT_PUBLIC_TITLE}
+              w={"100%"}
+              h={"100%"}
+              className="flex justify-start items-center"
+            >
+              <Img
+                radius="md"
+                component={Image}
+                src={
+                  logo.code === 200 && logo.data.imageId
+                    ? `/api/common/image/download/${logo.data.imageId}`
+                    : `https://dummyimage.com/133x28/000000/ffffff&text=logo`
                 }
-            }
-        >
-            <Container size={"xl"} h={"100%"}>
-                <Group w={"100%"} h={"100%"}>
-                    {/* className="w-[136px] h-full flex justify-center items-center ml-[24px]" */}
-                    <Center component="h1" w={136} h={"100%"} m={0}>
-                        <UnstyledButton
-                            component={Link}
-                            href="/"
-                            title="飞诺门阵"
-                            w={"100%"}
-                            h={"100%"}
-                            className="flex justify-center items-center"
-                        >
-                            <Img
-                                radius="md"
-                                component={Image}
-                                src={`https://dummyimage.com/133x28/000000/ffffff&text=logo`}
-                                alt="Logo"
-                                priority
-                                width={133}
-                                height={28}
-                            />
-                        </UnstyledButton>
-                    </Center>
-                    <Group
-                        w={"calc(100% - 152px)"}
-                        h={"100%"}
-                        justify="flex-end"
-                        align="center"
-                        wrap="nowrap"
-                    >
-                        <Group>
-                            <NavButton href="/" name="首页" />
-                            {/* <UnstyledButton
+                alt="Logo"
+                priority
+                width={133}
+                height={28}
+              />
+            </UnstyledButton>
+          </Center>
+          <Group
+            w={"calc(100% - 152px)"}
+            h={"100%"}
+            justify="flex-end"
+            align="center"
+            wrap="nowrap"
+          >
+            <Group>
+              <NavButton href="/" name="首页" />
+              {/* <UnstyledButton
                                 component={Link}
                                 href={"/"}
                                 style={{
@@ -129,32 +143,34 @@ export default async function Nav() {
                             >
                                 首页
                             </UnstyledButton> */}
-                            {categoryList.data.map((category) => {
-                                return (
-                                    <NavButton
-                                        key={category.id}
-                                        href={"/category/" + category.alias}
-                                        name={category.name}
-                                    />
-                                );
-                                // return (
-                                //     <UnstyledButton
-                                //         key={category.id}
-                                //         component={Link}
-                                //         href={"/category/" + category.alias}
-                                //         style={{
-                                //             color: isActived(
-                                //                 "/category/" + category.alias
-                                //             ),
-                                //         }}
-                                //     >
-                                //         {category.name}
-                                //     </UnstyledButton>
-                                // );
-                            })}
-                            <NavButton href="/about" name="关于我们" />
+              {categoryList.code === 200
+                ? categoryList.data.map((category) => {
+                    return (
+                      <NavButton
+                        key={category.id}
+                        href={"/category/" + category.alias}
+                        name={category.name}
+                      />
+                    );
+                    // return (
+                    //     <UnstyledButton
+                    //         key={category.id}
+                    //         component={Link}
+                    //         href={"/category/" + category.alias}
+                    //         style={{
+                    //             color: isActived(
+                    //                 "/category/" + category.alias
+                    //             ),
+                    //         }}
+                    //     >
+                    //         {category.name}
+                    //     </UnstyledButton>
+                    // );
+                  })
+                : null}
+              <NavButton href="/about" name="关于我们" />
 
-                            {/* <UnstyledButton
+              {/* <UnstyledButton
                                 component={Link}
                                 href={"/about"}
                                 style={{
@@ -163,14 +179,16 @@ export default async function Nav() {
                             >
                                 关于我们
                             </UnstyledButton> */}
-                        </Group>
-                        <Group gap={4}>
-                            <IconPhoneCall stroke={2} />
-                            <Text>010-53321858</Text>
-                        </Group>
-                    </Group>
-                </Group>
-            </Container>
-        </Container>
-    );
+            </Group>
+            {contactPhoneNumber.code === 200 && contactPhoneNumber.data ? (
+              <Group gap={4}>
+                <IconPhoneCall stroke={2} />
+                <Text>{contactPhoneNumber.data}</Text>
+              </Group>
+            ) : null}
+          </Group>
+        </Group>
+      </Container>
+    </Container>
+  );
 }
