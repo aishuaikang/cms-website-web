@@ -38,13 +38,19 @@ export const Pagination: React.FC<PaginationProps> = ({
             getItemProps={(page) => ({
                 component: Link,
                 href: `${path}/${page}`,
+                rel: "noopener noreferrer nofollow",
             })}
         >
             <Group gap={7} justify="center" align="center">
-                <MantinePagination.First component={Link} href={`${path}/1`} />
+                <MantinePagination.First
+                    component={Link}
+                    href={`${path}/1`}
+                    rel="noopener noreferrer nofollow"
+                />
                 <MantinePagination.Previous
                     component={Link}
                     href={page > 1 ? `${path}/${page - 1}` : `${path}/1`}
+                    rel="noopener noreferrer nofollow"
                 />
                 <MantinePagination.Items />
                 <MantinePagination.Next
@@ -54,10 +60,12 @@ export const Pagination: React.FC<PaginationProps> = ({
                             ? `${path}/${page + 1}`
                             : `${path}/${articleList.data.pages}`
                     }
+                    rel="noopener noreferrer nofollow"
                 />
                 <MantinePagination.Last
                     component={Link}
                     href={`${path}/${articleList.data.pages}`}
+                    rel="noopener noreferrer nofollow"
                 />
             </Group>
         </MantinePagination.Root>

@@ -7,6 +7,7 @@ import {
     Text,
     Tooltip,
     Alert,
+    Pill,
 } from "@mantine/core";
 import { Props } from "./layout";
 import Link from "next/link";
@@ -15,7 +16,7 @@ import { getArticleListByAlias } from "@/apis/article";
 import { notFound } from "next/navigation";
 import Pagination from "@/components/Category/Pagination";
 import ErrorComponent from "@/components/ErrorComponent";
-import { IconInfoCircle } from "@tabler/icons-react";
+import { IconClockHour3Filled, IconInfoCircle } from "@tabler/icons-react";
 import Carousel from "@/components/Category/Carousel";
 
 // import ErrorComponent from "@/components/ErrorComponent";
@@ -150,14 +151,30 @@ export default async function Category({ params }: Props) {
                                             justify="space-between"
                                             align="center"
                                         >
-                                            <Text
-                                                component="time"
-                                                fz={16}
-                                                c={"#9b9b9b"}
-                                                fw={"bold"}
-                                            >
-                                                {item.createdAt}
-                                            </Text>
+                                            <Group gap={5}>
+                                                <IconClockHour3Filled
+                                                    color={"#9b9b9b"}
+                                                />
+                                                <Text
+                                                    component="time"
+                                                    fz={16}
+                                                    c={"#9b9b9b"}
+                                                    fw={"bold"}
+                                                >
+                                                    {item.createdAt}
+                                                </Text>
+                                            </Group>
+                                            {item.tags.length ? (
+                                                <Group gap={8}>
+                                                    {item.tags.map((tag) => {
+                                                        return (
+                                                            <Pill key={tag.id}>
+                                                                {tag.name}
+                                                            </Pill>
+                                                        );
+                                                    })}
+                                                </Group>
+                                            ) : null}
                                         </Group>
                                     </Stack>
                                 </UnstyledButton>

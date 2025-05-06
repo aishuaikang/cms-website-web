@@ -1,4 +1,5 @@
 import { getCategoryByAlias } from "@/apis/category";
+import { DICT_CODE, getDictExtraByCode } from "@/apis/dict";
 import ErrorComponent from "@/components/ErrorComponent";
 import { Anchor, Breadcrumbs, Center, Stack, Text } from "@mantine/core";
 import type { Metadata } from "next";
@@ -46,9 +47,16 @@ export default async function RootLayout({
         );
     }
 
+    const title = await getDictExtraByCode(DICT_CODE.TITLE);
+
+    const t =
+        title.code === 200 && title.data
+            ? title.data
+            : process.env.TITLE || "cms";
+
     const items = [
-        { title: process.env.TITLE || "cms", href: "/" },
-        { title: category.data.name, href: "/" + category.data.alias },
+        { title: t, href: "/" },
+        { title: category.data.name, href: "/category/" + category.data.alias },
     ].map((item, index) => (
         <Anchor component={Link} href={item.href} key={index} size="sm">
             {item.title}

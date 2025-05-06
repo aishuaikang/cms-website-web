@@ -8,9 +8,10 @@ import { useCallback } from "react";
 export interface NavButtonProps {
     href: string;
     name: string;
+    rel?: string;
 }
 
-const NavButton: React.FC<NavButtonProps> = ({ href, name }) => {
+const NavButton: React.FC<NavButtonProps> = ({ href, name, rel }) => {
     const pathname = usePathname();
 
     const isActived = useCallback(
@@ -34,6 +35,7 @@ const NavButton: React.FC<NavButtonProps> = ({ href, name }) => {
             component={Link}
             href={href}
             style={{ color: isActived(href) }}
+            rel={rel}
         >
             {name}
         </UnstyledButton>

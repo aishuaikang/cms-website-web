@@ -89,17 +89,22 @@ export default async function Category({ params }: Props) {
                         {article.data.createdAt}
                     </Text>
                     {/* 标签 */}
-                    <Group w={"100%"} gap={8}>
-                        {article.data.tags.map((tag) => {
-                            return (
-                                <Pill key={tag.id} className="cursor-pointer">
-                                    {tag.name}
-                                </Pill>
-                            );
-                        })}
-                    </Group>
+                    {article.data.tags.length ? (
+                        <Group w={"100%"} gap={8}>
+                            {article.data.tags.map((tag) => {
+                                return (
+                                    <Pill
+                                        key={tag.id}
+                                        className="cursor-pointer"
+                                    >
+                                        {tag.name}
+                                    </Pill>
+                                );
+                            })}
+                        </Group>
+                    ) : null}
                 </Stack>
-                <Divider my="xs" />
+                <Divider />
                 <TypographyStylesProvider>
                     {parsedHtml}
                 </TypographyStylesProvider>
@@ -120,6 +125,11 @@ export default async function Category({ params }: Props) {
                 </Stack>
 
                 <Stack w={"100%"} h={"auto"} component="ul" p={0} m={0}>
+                    {relatedArticleList.data.total ? null : (
+                        <Text c={"#9b9b9b"} size="sm">
+                            暂无相关内容
+                        </Text>
+                    )}
                     {relatedArticleList.data.rows.map((article) => {
                         return (
                             <Center
@@ -161,13 +171,13 @@ export default async function Category({ params }: Props) {
                                             fz={14}
                                             fw={"bold"}
                                             c={"#383838"}
-                                            lineClamp={2}
+                                            lineClamp={1}
                                         >
                                             {article.title}
                                         </Text>
                                         <Text
                                             component="time"
-                                            fz={14}
+                                            fz={12}
                                             c={"#636363"}
                                         >
                                             {article.createdAt}
@@ -179,7 +189,6 @@ export default async function Category({ params }: Props) {
                     })}
                 </Stack>
             </Stack>
-            {/* </div> */}
         </Group>
     );
 }
