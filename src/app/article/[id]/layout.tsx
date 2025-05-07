@@ -5,7 +5,7 @@ import ErrorComponent from "@/components/ErrorComponent";
 import { Anchor, Breadcrumbs, Center, Stack, Text } from "@mantine/core";
 import type { Metadata } from "next";
 import Link from "next/link";
-
+import articleBg from "@/assets/images/article_bg.png";
 export type Props = {
     params: Promise<{ id: string }>;
 };
@@ -44,7 +44,11 @@ export default async function RootLayout({
     if (article.code !== 200) {
         return (
             <Stack w={"100%"} h={"100%"} gap={"md"} pb={25} bg={"#eee"}>
-                <Center w={"100%"} h={450} bg={"#F5F5F5"}>
+                <Center
+                    w={"100%"}
+                    h={450}
+                    style={{ backgroundImage: `url(${articleBg.src})` }}
+                >
                     <Stack w={1200} h={"100%"} gap={50} justify="center">
                         <ErrorComponent
                             title="获取文章失败"
@@ -60,7 +64,11 @@ export default async function RootLayout({
     if (category.code !== 200) {
         return (
             <Stack w={"100%"} h={"100%"} gap={"md"} pb={25} bg={"#eee"}>
-                <Center w={"100%"} h={450} bg={"#F5F5F5"}>
+                <Center
+                    w={"100%"}
+                    h={450}
+                    style={{ backgroundImage: `url(${articleBg.src})` }}
+                >
                     <Stack w={1200} h={"100%"} gap={50} justify="center">
                         <ErrorComponent
                             title="获取分类失败"
@@ -94,7 +102,11 @@ export default async function RootLayout({
 
     return (
         <Stack w={"100%"} h={"100%"} gap={"md"} pb={25} bg={"#eee"}>
-            <Center w={"100%"} h={450} bg={"#F5F5F5"}>
+            <Center
+                w={"100%"}
+                h={450}
+                style={{ backgroundImage: `url(${articleBg.src})` }}
+            >
                 <Stack w={1200} h={"100%"} gap={50} justify="center">
                     <Text component="h2" fz={40} fw={"bold"} c={"#383838"}>
                         {category.data.name}

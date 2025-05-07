@@ -18,8 +18,6 @@ import parse, { Text as T } from "html-react-parser";
 import Image from "next/image";
 import Link from "next/link";
 
-// import ErrorComponent from "@/components/ErrorComponent";
-
 export default async function Category({ params }: Props) {
     const { id } = await params;
 
@@ -77,11 +75,7 @@ export default async function Category({ params }: Props) {
                 p={38}
                 gap={16}
             >
-                <Stack
-                    w={"100%"}
-                    h={"auto"}
-                    // className="w-full h-auto flex flex-col justify-start items-start border-b border-[#E5E5E5] pb-6 mb-6"
-                >
+                <Stack w={"100%"} h={"auto"}>
                     <Text component="h1" fz={32} fw={"bold"} c={"#383838"}>
                         {article.data.title}
                     </Text>

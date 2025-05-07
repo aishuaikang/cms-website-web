@@ -26,7 +26,7 @@ const CompanyProfile = async () => {
                         企业简介
                     </Text>
                     <Text component="h3" fz={36}>
-                        Company Profile
+                        Company Vision
                     </Text>
                 </Group>
                 <Group gap={50} h={450}>
@@ -56,7 +56,7 @@ const CompanyProfile = async () => {
                                 radius="md"
                                 component={Image}
                                 src={`/api/common/image/download/${companyProfile.data.imageId}`}
-                                alt="Banner3"
+                                alt="Company Profile"
                                 width={600}
                                 height={450}
                             />

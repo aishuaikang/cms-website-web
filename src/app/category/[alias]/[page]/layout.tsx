@@ -4,6 +4,7 @@ import ErrorComponent from "@/components/ErrorComponent";
 import { Anchor, Breadcrumbs, Center, Stack, Text } from "@mantine/core";
 import type { Metadata } from "next";
 import Link from "next/link";
+import categoryBg from "@/assets/images/category_bg.png";
 
 export type Props = {
     params: Promise<{ alias: string; page: string }>;
@@ -65,7 +66,11 @@ export default async function RootLayout({
 
     return (
         <Stack w={"100%"} h={"100%"} gap={"md"} pb={25} bg={"#eee"}>
-            <Center w={"100%"} h={450} bg={"#F5F5F5"}>
+            <Center
+                w={"100%"}
+                h={450}
+                style={{ backgroundImage: `url(${categoryBg.src})` }}
+            >
                 <Stack w={1200} h={"100%"} gap={50} justify="center">
                     <Text component="h2" fz={40} fw={"bold"} c={"#383838"}>
                         {category.data.name}

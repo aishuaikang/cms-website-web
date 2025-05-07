@@ -21,6 +21,7 @@ export async function GET(
     }
 
     const imageBuffer = await res.arrayBuffer();
+    console.log(res.headers.get("Content-Type"));
 
     return new NextResponse(imageBuffer, {
         headers: {
