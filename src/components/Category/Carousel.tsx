@@ -2,8 +2,8 @@
 import { Image as Img } from "@/apis/article/types";
 import { Carousel as MantineCarousel } from "@mantine/carousel";
 export interface CarouselProps {
-    width?: number | string;
-    height?: number | string;
+    width?: number;
+    height?: number;
     images: Img[];
 }
 
@@ -15,36 +15,28 @@ const Carousel: React.FC<CarouselProps> = ({ width, height, images }) => {
         <MantineCarousel
             withIndicators
             w={width}
-            height={height} // slideSize="70%"
+            height={height}
             slideGap="md"
-            // controlsOffset="md"
-            // controlSize={40}
             loop
-            // dragFree
         >
             {images.map((item) => {
                 return (
                     <MantineCarousel.Slide key={item.id}>
                         <Image
-                            // radius="md"
-                            // component={Image}
-                            // src={`https://dummyimage.com/293x220/000000/ffffff&text=logo`}
                             src={`/api/common/image/download/${item.id}`}
                             alt="Logo"
                             priority
-                            width={293}
-                            height={220}
-                            // w={293}
-                            // h={220}
-                            className="w-[293px] h-[220px] rounded-md object-cover"
+                            width={width}
+                            height={height}
+                            className="rounded-md object-cover"
+                            style={{
+                                width,
+                                height,
+                            }}
                         />
                     </MantineCarousel.Slide>
                 );
             })}
-            {/* <MantineCarousel.Slide>1</MantineCarousel.Slide>
-            <MantineCarousel.Slide>2</MantineCarousel.Slide>
-            <MantineCarousel.Slide>3</MantineCarousel.Slide> */}
-            {/* ...other slides */}
         </MantineCarousel>
     );
 };

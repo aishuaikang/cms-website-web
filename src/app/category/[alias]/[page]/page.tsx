@@ -16,7 +16,7 @@ import { getArticleListByAlias } from "@/apis/article";
 import { notFound } from "next/navigation";
 import Pagination from "@/components/Category/Pagination";
 import ErrorComponent from "@/components/ErrorComponent";
-import { IconClockHour3Filled, IconInfoCircle } from "@tabler/icons-react";
+import { IconClockHour3Filled, IconDatabaseOff } from "@tabler/icons-react";
 import Carousel from "@/components/Category/Carousel";
 
 // import ErrorComponent from "@/components/ErrorComponent";
@@ -62,10 +62,13 @@ export default async function Category({ params }: Props) {
                 {articleList.data.total === 0 ? (
                     <Alert
                         variant="light"
-                        color="blue"
-                        title="暂无内容"
-                        icon={<IconInfoCircle />}
-                    ></Alert>
+                        color="gray"
+                        title="没有数据"
+                        icon={<IconDatabaseOff />}
+                        w={"100%"}
+                    >
+                        暂无内容
+                    </Alert>
                 ) : null}
                 {articleList.data.rows.map((item) => {
                     return (
@@ -154,10 +157,11 @@ export default async function Category({ params }: Props) {
                                             <Group gap={5}>
                                                 <IconClockHour3Filled
                                                     color={"#9b9b9b"}
+                                                    size={16}
                                                 />
                                                 <Text
                                                     component="time"
-                                                    fz={16}
+                                                    fz={14}
                                                     c={"#9b9b9b"}
                                                     fw={"bold"}
                                                 >

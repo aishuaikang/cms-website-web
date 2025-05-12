@@ -31,6 +31,7 @@ const Banner: React.FC<BannerProps> = ({ value }) => {
                                 h={"100%"}
                                 justify={"center"}
                                 align={"center"}
+                                rel="noopener noreferrer nofollow"
                             >
                                 <Image
                                     src={`/api/common/image/download/${item.imageId}`}
@@ -53,6 +54,7 @@ const Banner: React.FC<BannerProps> = ({ value }) => {
                         h={"100%"}
                         justify={"center"}
                         align={"center"}
+                        rel="noopener noreferrer nofollow"
                     >
                         <Image
                             src={

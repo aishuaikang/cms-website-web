@@ -14,6 +14,7 @@ import {
     UnstyledButton,
     Center,
 } from "@mantine/core";
+import { IconClockHour3Filled } from "@tabler/icons-react";
 import parse, { Text as T } from "html-react-parser";
 import Image from "next/image";
 import Link from "next/link";
@@ -67,7 +68,6 @@ export default async function Category({ params }: Props) {
 
     return (
         <Group justify="space-between" align="flex-start">
-            {/* <div className="w-full h-auto flex flex-col justify-center items-center mb-[100px] mt-9"> */}
             <Stack
                 w={"calc(100% - 260px - 16px)"}
                 h={"100%"}
@@ -79,9 +79,17 @@ export default async function Category({ params }: Props) {
                     <Text component="h1" fz={32} fw={"bold"} c={"#383838"}>
                         {article.data.title}
                     </Text>
-                    <Text component="time" fz={16} c={"#9b9b9b"}>
-                        {article.data.createdAt}
-                    </Text>
+                    <Group gap={5}>
+                        <IconClockHour3Filled color={"#9b9b9b"} size={16} />
+                        <Text
+                            component="time"
+                            fz={14}
+                            c={"#9b9b9b"}
+                            fw={"bold"}
+                        >
+                            {article.data.createdAt}
+                        </Text>
+                    </Group>
                     {/* 标签 */}
                     {article.data.tags.length ? (
                         <Group w={"100%"} gap={8}>
